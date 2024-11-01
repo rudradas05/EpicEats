@@ -301,7 +301,7 @@
     margin-top: 25vh;
     z-index: 1;
     background-color: #fff2ef;
-    width: 2%;
+    width: 100px;
     border: 1px solid tomato;
     border-radius: 20px;
   }
