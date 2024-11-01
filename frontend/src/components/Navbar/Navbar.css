@@ -317,7 +317,6 @@
 
 @media (max-width: 450px) {
   .navbar .logo {
-    width: 50px;
     height: fit-content;
   }
 
