@@ -1,11 +1,3 @@
-// import mongoose from "mongoose";
-
-// export const connectDB = async () => {
-//   await mongoose
-//     .connect(MONGOD_SECRET_KEY)
-//     .then(() => console.log("DB Connected"));
-// };
-
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
