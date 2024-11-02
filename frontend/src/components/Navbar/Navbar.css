@@ -205,7 +205,7 @@
   font-size: 16px;
   color: #05195c;
   border: 1px solid tomato;
-  padding: 2px 15px;
+  padding: 2px 10px;
   border-radius: 50px;
   cursor: pointer;
   transition: 0.3s;
@@ -242,7 +242,7 @@
 
   .navbar-menu {
     gap: 15px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .navbar-right {
@@ -264,8 +264,8 @@
     display: none;
   }
   .navbar-basket-icon .cart-count {
-    top: -5px;
-    right: -3px;
+    top: -7px;
+    right: 3px;
     width: 15px;
     height: 15px;
     font-size: 12px;
@@ -317,15 +317,14 @@
 
 @media (max-width: 450px) {
   .navbar .logo {
-    height: fit-content;
+    width: 120px;
+  }
+  .navbar-right {
+    gap: 10px;
   }
 
   .navbar-right button {
-    padding: 4px 15px;
-    font-size: 10px;
-  }
-
-  .ham-menu-btn {
-    padding: 4px 12px;
+    padding: 4px 9px;
+    font-size: 11px;
   }
 }
