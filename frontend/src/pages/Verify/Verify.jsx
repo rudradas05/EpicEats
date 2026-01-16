@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
+
 import "./Verify.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
@@ -33,7 +35,12 @@ const Verify = () => {
   }, []);
   return (
     <div className="verify">
-      <div className="spinner"></div>
+      <motion.div
+        className="spinner"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+      ></motion.div>
+      <p>Verifying your payment...</p>
     </div>
   );
 };

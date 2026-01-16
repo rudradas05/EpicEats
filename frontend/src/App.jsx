@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar/Navbar";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+import Login from "./components/Login/Login";
+
 import Home from "./pages/Home/Home";
 import Cart from "./pages/Cart/Cart";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
-import Footer from "./components/Footer/Footer";
-import Login from "./components/Login/Login";
 import Profile from "./pages/Profile/Profile";
-import Searchbar from "./components/Searchbar/Searchbar";
 import Verify from "./pages/Verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
 
@@ -16,19 +17,23 @@ const App = () => {
 
   return (
     <>
-      {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
+      {showLogin && <Login setShowLogin={setShowLogin} />}
+
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
-        <Searchbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<PlaceOrder />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/verify" element={<Verify />} />
-          <Route path="/myorders" element={<MyOrders />} />
-        </Routes>
+
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/order" element={<PlaceOrder />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/verify" element={<Verify />} />
+            <Route path="/myorders" element={<MyOrders />} />
+          </Routes>
+        </main>
       </div>
+
       <Footer />
     </>
   );

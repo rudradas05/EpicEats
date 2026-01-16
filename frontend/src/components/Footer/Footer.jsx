@@ -1,10 +1,19 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
 import "./Footer.css";
 import { assets } from "../../assets/assets";
 
 const Footer = () => {
   return (
-    <div className="footer" id="footer">
+    <motion.div
+      className="footer"
+      id="footer"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="footer-content">
         <div className="footer-content-left">
           <img className="footer-logo" src={assets.logo} alt="company logo" />
@@ -39,28 +48,28 @@ const Footer = () => {
         <div className="footer-content-center">
           <h2>EpicEats</h2>
           <ul>
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Delivery</li>
-            <li>Privacy Policy</li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About Us</Link>
+            </li>
+            <li>
+              <Link to="/delivery">Delivery</Link>
+            </li>
+            <li>
+              <Link to="/privacy">Privacy Policy</Link>
+            </li>
           </ul>
         </div>
         <div className="footer-content-right">
           <h2>Get in Touch</h2>
           <ul>
             <li>
-              <a
-                href="tel:+919679490960"
-                style={{ color: "#d9d9d9", textDecoration: "none" }}
-              >
-                +91-9679490960
-              </a>
+              <a href="tel:+919679490960">+91-9679490960</a>
             </li>
             <li>
-              <a
-                href="mailto:dasrudra.suv@gmail.com"
-                style={{ color: "#d9d9d9", textDecoration: "none" }}
-              >
+              <a href="mailto:dasrudra.suv@gmail.com">
                 dasrudra.suv@gmail.com
               </a>
             </li>
@@ -71,7 +80,7 @@ const Footer = () => {
       <p className="footer-copyright">
         Copyright 2024 @ EpicEats - All Rights Reserved.
       </p>
-    </div>
+    </motion.div>
   );
 };
 

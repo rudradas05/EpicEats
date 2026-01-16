@@ -5,7 +5,12 @@
   box-shadow: 0px 0px 10px #00000015;
   transition: 0.3s;
   animation: fadeIn 1s;
-  background-color: rgb(25, 24, 24);
+  background-color: #f9f9f9;
+}
+
+.food-item:hover {
+  box-shadow: 0px 4px 20px #00000025;
+  transform: scale(1.02);
 }
 
 .food-item-image {
@@ -14,7 +19,6 @@
 
   border-radius: 15px 15px 0px 0px;
   object-fit: cover;
-  border-radius: 6px;
 }
 
 .food-item-info {
@@ -31,7 +35,7 @@
 .food-item-name-rating p {
   font-size: 20px;
   font-weight: 500;
-  color: azure;
+  color: #333;
 }
 
 .food-item-name-rating-img {
@@ -39,7 +43,7 @@
 }
 
 .food-item-desc {
-  color: #ffffff;
+  color: #333;
   font-size: 12px;
 }
 

@@ -87,19 +87,31 @@ const getProfile = async (req, res) => {
 
 //uspadet user profile
 const updateProfile = async (req, res) => {
-  const { userId, name } = req.body;
+  const { userId, name, email } = req.body;
   try {
-    if (!name) {
+    if (!name && !email) {
       return res
         .status(400)
-        .json({ success: false, message: "Name is required" });
+        .json({ success: false, message: "Name or email is required" });
     }
 
-    const updatedUser = await userModel.findByIdAndUpdate(
-      userId,
-      { name },
-      { new: true }
-    );
+    const updateData = {};
+    if (name) {
+      updateData.name = name;
+    }
+    if (email) {
+      if (!validator.isEmail(email)) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Invalid email format" });
+      }
+      updateData.email = email;
+    }
+
+    const updatedUser = await userModel.findByIdAndUpdate(userId, updateData, {
+      new: true,
+    });
+
     if (!updatedUser) {
       return res
         .status(404)

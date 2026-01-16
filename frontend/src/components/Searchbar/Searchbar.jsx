@@ -1,28 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { motion } from "framer-motion";
+
 import "./Searchbar.css";
 import { StoreContext } from "../../context/StoreContext";
 import { assets } from "../../assets/assets";
-import { useLocation } from "react-router-dom";
 
 const Searchbar = () => {
-  const { search, setSearch, showSearch, setShowSearch } =
-    useContext(StoreContext);
-  const [isVisible, setIsVisible] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    setIsVisible(location.hash === "#explore-menu" && showSearch);
-  }, [location.hash, showSearch]);
+  const { search, setSearch } = useContext(StoreContext);
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
 
-  const handleClose = () => {
-    setShowSearch(false);
-  };
-
-  return isVisible ? (
+  return (
     <div className="searchbar">
       <div className="searchbar-container">
         <input
@@ -32,16 +22,16 @@ const Searchbar = () => {
           value={search}
           onChange={handleSearchChange}
         />
-        <img className="searchbar-icon" src={assets.search_icon} alt="Search" />
+        <motion.img
+          className="searchbar-icon"
+          src={assets.search_icon}
+          alt="Search"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.2 }}
+        />
       </div>
-      <img
-        onClick={handleClose}
-        className="searchbar-close"
-        src={assets.cross_icon}
-        alt="Close"
-      />
     </div>
-  ) : null;
+  );
 };
 
 export default Searchbar;

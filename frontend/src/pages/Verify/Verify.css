@@ -1,17 +1,24 @@
 .verify {
   min-height: 60vh;
   display: grid;
+  place-items: center;
 }
 
 .verify .spinner {
-  width: 100px;
-  height: 100px;
-  place-self: center;
-  border: 5px solid #bdbdbd;
-  border-top-color: tomato;
+  width: 80px;
+  height: 80px;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #ff6347;
   border-radius: 50%;
-  animation: rotate 1s infinite;
+  animation: rotate 1s linear infinite;
 }
+
+.verify p {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #555;
+}
+
 @keyframes rotate {
   100% {
     transform: rotate(360deg);

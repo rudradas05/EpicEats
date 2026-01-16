@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 import "./PlaceOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, token, food_list, cartItems, url } =
@@ -59,7 +61,13 @@ const PlaceOrder = () => {
   }, [token]);
 
   return (
-    <form onSubmit={placeOrder} className="place-order">
+    <motion.form
+      onSubmit={placeOrder}
+      className="place-order"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="place-order-left">
         <p className="title">Deliver Information</p>
         <div className="multifields">
@@ -70,6 +78,7 @@ const PlaceOrder = () => {
             value={data.firstName}
             type="text"
             placeholder="First Name"
+            aria-label="First Name"
           />
           <input
             required
@@ -78,6 +87,7 @@ const PlaceOrder = () => {
             value={data.lastName}
             type="text"
             placeholder="Last Name"
+            aria-label="Last Name"
           />
         </div>
         <input
@@ -87,6 +97,7 @@ const PlaceOrder = () => {
           value={data.email}
           type="email"
           placeholder="Email address"
+          aria-label="Email address"
         />
         <input
           required
@@ -95,6 +106,7 @@ const PlaceOrder = () => {
           value={data.street}
           type="text"
           placeholder="Street"
+          aria-label="Street"
         />
         <div className="multifields">
           <input
@@ -104,6 +116,7 @@ const PlaceOrder = () => {
             value={data.city}
             type="text"
             placeholder="City"
+            aria-label="City"
           />
           <input
             required
@@ -112,6 +125,7 @@ const PlaceOrder = () => {
             value={data.state}
             type="text"
             placeholder="State"
+            aria-label="State"
           />
         </div>
         <div className="multifields">
@@ -122,6 +136,7 @@ const PlaceOrder = () => {
             value={data.pincode}
             type="text"
             placeholder="Pin Code"
+            aria-label="Pin Code"
           />
           <input
             required
@@ -130,6 +145,7 @@ const PlaceOrder = () => {
             value={data.country}
             type="text"
             placeholder="Country"
+            aria-label="Country"
           />
         </div>
         <input
@@ -139,6 +155,7 @@ const PlaceOrder = () => {
           value={data.phone}
           type="text"
           placeholder="Phone"
+          aria-label="Phone"
         />
       </div>
       <div className="place-order-right">
@@ -169,7 +186,7 @@ const PlaceOrder = () => {
           </button>
         </div>
       </div>
-    </form>
+    </motion.form>
   );
 };
 

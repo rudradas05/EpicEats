@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
 import "./MyOrders.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
@@ -15,7 +17,6 @@ const MyOrders = () => {
       { headers: { token } }
     );
     setData(response.data.data);
-    console.log(response.data.data);
   };
   useEffect(() => {
     if (token) {
@@ -29,8 +30,14 @@ const MyOrders = () => {
       <div className="container">
         {data.map((order, index) => {
           return (
-            <div className="my-orders-order" key={index}>
-              <img src={assets.parcel_icon} alt="" />
+            <motion.div
+              key={index}
+              className="my-orders-order"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <img src={assets.parcel_icon} alt="Parcel" />
               <p>
                 {order.items.map((item, index) => {
                   if (index === order.items.length - 1) {
@@ -47,7 +54,7 @@ const MyOrders = () => {
                 <b>{order.status}</b>
               </p>
               <button onClick={fetchOrders}>Track Order</button>
-            </div>
+            </motion.div>
           );
         })}
       </div>

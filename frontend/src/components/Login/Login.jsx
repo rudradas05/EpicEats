@@ -1,4 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { motion } from "framer-motion";
+
 import "./Login.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
@@ -40,20 +42,23 @@ const Login = ({ setShowLogin }) => {
   };
 
   return (
-    <div className="login">
+    <motion.div
+      className="login"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
       <form onSubmit={onLogin} className="login-container">
         <div className="login-title">
           <h2>{currState}</h2>
           <img
             onClick={() => setShowLogin(false)}
             src={assets.cross_icon}
-            alt=""
+            alt="Close"
           />
         </div>
         <div className="login-inputs">
-          {currState === "Login" ? (
-            <></>
-          ) : (
+          {currState === "Login" ? null : (
             <input
               name="name"
               onChange={onChangeHandler}
@@ -100,7 +105,7 @@ const Login = ({ setShowLogin }) => {
           </p>
         )}
       </form>
-    </div>
+    </motion.div>
   );
 };
 

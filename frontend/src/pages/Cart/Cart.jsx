@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
-import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cartItems, food_list, removeFromCart, getTotalCartAmount, url } =
     useContext(StoreContext);
   const navigate = useNavigate();
+
   return (
     <div className="cart">
       <div className="cart-items">
@@ -21,26 +24,40 @@ const Cart = () => {
         <br />
         <hr />
 
-        {food_list.map((item) => {
-          if (cartItems[item._id] > 0) {
-            return (
-              <div>
-                <div className="cart-items-title cart-items-item">
-                  <img src={url + "/images/" + item.image} alt="" />
-                  <p>{item.name}</p>
-                  <p>₹{item.price}</p>
-                  <p>{cartItems[item._id]}</p>
-                  <p>₹{item.price * cartItems[item._id]}</p>
-                  <p onClick={() => removeFromCart(item._id)} className="cross">
-                    x
-                  </p>
-                </div>
-                <hr />
-              </div>
-            );
-          }
-          return null; // Return null if cartItems[item._id] is 0
-        })}
+        <AnimatePresence>
+          {food_list.map((item) => {
+            if (cartItems[item._id] > 0) {
+              return (
+                <motion.div
+                  key={item._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="cart-items-title cart-items-item">
+                    <img
+                      src={url + "/images/" + item.image}
+                      alt={item.name}
+                    />
+                    <p>{item.name}</p>
+                    <p>₹{item.price}</p>
+                    <p>{cartItems[item._id]}</p>
+                    <p>₹{item.price * cartItems[item._id]}</p>
+                    <p
+                      onClick={() => removeFromCart(item._id)}
+                      className="cross"
+                    >
+                      x
+                    </p>
+                  </div>
+                  <hr />
+                </motion.div>
+              );
+            }
+            return null;
+          })}
+        </AnimatePresence>
       </div>
       <div className="cart-buttom">
         <div className="cart-total">

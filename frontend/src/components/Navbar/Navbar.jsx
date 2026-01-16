@@ -4,7 +4,10 @@ import { assets } from "../../assets/assets";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
+import Searchbar from "../Searchbar/Searchbar";
 import { GiHamburgerMenu } from "react-icons/gi";
+
+
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
@@ -14,7 +17,6 @@ const Navbar = ({ setShowLogin }) => {
     getTotalCartItems,
     token,
     setToken,
-    setShowSearch,
   } = useContext(StoreContext);
 
   const navigate = useNavigate();
@@ -56,13 +58,6 @@ const Navbar = ({ setShowLogin }) => {
           >
             Menu
           </a>
-          {/* <a
-            href="#app-download"
-            onClick={() => setMenu("mobile-app")}
-            className={menu === "mobile-app" ? "active" : ""}
-          >
-              Near By Resturent
-          </a> */}
           <a
             href="#footer"
             onClick={() => setMenu("contact-us")}
@@ -73,18 +68,12 @@ const Navbar = ({ setShowLogin }) => {
         </ul>
       </nav>
 
-      <div className="navbar-right">
-        <div className="navbar-search-icon">
-          <img
-            onClick={() => setShowSearch(true)}
-            src={assets.search_icon}
-            alt=""
-          />
-        </div>
+      <Searchbar />
 
+      <div className="navbar-right">
         <div className="navbar-basket-icon">
           <Link to="/cart">
-            <img src={assets.basket_icon} alt="" />
+            <img src={assets.basket_icon} alt="Basket" />
           </Link>
           <div className="cart-count">{getTotalCartItems()}</div>
         </div>
@@ -97,22 +86,21 @@ const Navbar = ({ setShowLogin }) => {
             <img
               className="navbar-profile-icon"
               src={assets.profile_icon}
-              alt=""
+              alt="Profile"
             />
             <ul className="nav-profile-dropdown">
               <li onClick={() => navigate("/profile")}>
-                <img src={assets.profile_icon} alt="" />
-
+                <img src={assets.profile_icon} alt="Profile" />
                 <p>My Profile</p>
               </li>
               <hr />
               <li onClick={() => navigate("/myorders")}>
-                <img src={assets.bag_icon} alt="" />
+                <img src={assets.bag_icon} alt="Orders" />
                 <p>Orders</p>
               </li>
               <hr />
               <li onClick={logout}>
-                <img src={assets.logout_icon} alt="" />
+                <img src={assets.logout_icon} alt="Logout" />
                 <p>Logout</p>
               </li>
             </ul>
@@ -124,3 +112,5 @@ const Navbar = ({ setShowLogin }) => {
 };
 
 export default Navbar;
+
+

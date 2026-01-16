@@ -5,13 +5,13 @@ import {
   registerUser,
   updateProfile,
 } from "../controllers/userController.js";
-import authUser from "../middleware/authUser.js";
+import authMiddleware from "../middleware/auth.js";
 
 const userRouter = express.Router();
 
 userRouter.post("/register", registerUser);
 userRouter.post("/login", loginUser);
-userRouter.get("/getprofile", authUser, getProfile);
-userRouter.post("/updateprofile", authUser, updateProfile);
+userRouter.get("/getprofile", authMiddleware, getProfile);
+userRouter.post("/updateprofile", authMiddleware, updateProfile);
 
 export default userRouter;

@@ -1,4 +1,3 @@
-import { error, log } from "console";
 import foodModel from "../models/foodModel.js";
 import fs from 'fs';
 
@@ -20,23 +19,27 @@ const addFood= async(req,res)=>{
         res.json({success:true,message:"Food Added"})
     } catch (error){
         console.log(error);
-        res.json({success:false,message:"Error"})
+        res.json({success:false,message:"Error adding food", error})
     }
 }
 
 
 //all food list
 
-const listFood =async(req,res)=>{
-    try{
-        const foods =await foodModel.find({});
-        res.json({success:true,data:foods})
+const listFood = async (req, res) => {
+  try {
+    const { name } = req.query;
+    const query = {};
+    if (name) {
+      query.name = { $regex: name, $options: "i" };
     }
-    catch{
-        console.log(error);
-        res.json({success:false,message:"Error"});
-    }
-}
+    const foods = await foodModel.find(query);
+    res.json({ success: true, data: foods });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Error listing food", error });
+  }
+};
 
 //remove food item
 const removeFood=async(req,res)=>{
@@ -47,7 +50,7 @@ const removeFood=async(req,res)=>{
         res.json({success:true,message:"Food Removed"})
     } catch (error) {
         console.log(error);
-        res.json({success:false,message:"Error"});
+        res.json({success:false,message:"Error removing food", error});
     }
 }
 

@@ -53,10 +53,33 @@
   border-radius: 50%;
 }
 
+.footer-content-right a {
+  color: #d9d9d9;
+  text-decoration: none;
+}
+
 .footer-social-icons img {
   width: 40px;
   margin-right: 15px;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-social-icons img:hover {
+  transform: scale(1.1);
+}
+
+.footer-content-left li:hover,
+.footer-content-right li:hover,
+.footer-content-center li:hover {
+  color: white;
+  transform: translateX(5px);
+}
+
+.footer-content-right h2,
+.footer-content-center h2 {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .footer hr {

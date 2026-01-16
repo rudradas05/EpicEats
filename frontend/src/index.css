@@ -4,12 +4,19 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: outfit;
+  font-family: "Outfit", sans-serif;
+  scroll-behavior: smooth;
+}
+
+html {
   scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 a {
@@ -18,8 +25,23 @@ a {
 }
 
 .app {
-  width: 80%;
+  width: 100%;
+  max-width: 1200px;
   margin: auto;
+  padding: 0 1rem;
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+  .app {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app {
+    padding: 0;
+  }
 }
 
 @keyframes fadeIn {
@@ -29,4 +51,111 @@ a {
   100% {
     opacity: 1;
   }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(255, 127, 95, 0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 127, 95, 0.6);
+  }
+}
+
+button,
+input,
+textarea,
+select {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active,
+input:active,
+textarea:active {
+  transform: scale(0.98);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff7e5f 0%, #ff6b5f 100%);
+  border-radius: 5px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff6b5f 0%, #ff5a4f 100%);
 }

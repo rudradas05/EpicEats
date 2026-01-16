@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // placing user order form frontend
 const placeOrder = async (req, res) => {
-  const frontend_url = "https://epiceats-3eav.onrender.com";
+  const frontend_url = process.env.FRONTEND_URL;
   try {
     const newOrder = new orderModel({
       userId: req.body.userId,
@@ -55,7 +55,7 @@ const placeOrder = async (req, res) => {
     res.json({ success: true, session_url: session.url });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.json({ success: false, message: "Error placing order", error });
   }
 };
 
@@ -72,7 +72,7 @@ const verifyOrder = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.json({ success: false, message: "Error verifying order", error });
   }
 };
 
@@ -84,7 +84,7 @@ const userOrders = async (req, res) => {
     res.json({ success: true, data: orders });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.json({ success: false, message: "Error getting user orders", error });
   }
 };
 
@@ -92,11 +92,18 @@ const userOrders = async (req, res) => {
 
 const listOrders = async (req, res) => {
   try {
-    const orders = await orderModel.find({});
-    res.json({ success: true, data: orders });
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    const orders = await orderModel.find({}).skip(skip).limit(limit);
+    const totalOrders = await orderModel.countDocuments();
+    const totalPages = Math.ceil(totalOrders / limit);
+
+    res.json({ success: true, data: orders, totalPages });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.json({ success: false, message: "Error placing order", error });
   }
 };
 
@@ -110,7 +117,7 @@ const updateStatus = async (req, res) => {
     res.json({ success: true, message: "Order Status Updated" });
   } catch (error) {
     console.log(error);
-    res.json({ success: false, message: "Error" });
+    res.json({ success: false, message: "Error placing order", error });
   }
 };
 

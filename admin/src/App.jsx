@@ -9,8 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  // const url = "http://localhost:4000";
-  const url = "https://epiceats-backend-0q1i.onrender.com";
+  const url = import.meta.env.VITE_BACKEND_URL;
 
   return (
     <div>

@@ -1,54 +1,70 @@
 .navbar {
   padding: 10px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  background-color: #f8f9fa;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: background-color 0.3s;
   color: #49557e;
-  border-radius: 10px;
+  border-radius: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.navbar:hover {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
 }
 
 .navbar a {
   color: #333;
   padding: 10px 10px;
-  transition: color 0.3s ease-in-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  position: relative;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff7e5f, #ff6b5f);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navbar a:hover {
   color: #ff7e5f;
 }
 
+.navbar a:hover::after {
+  width: 100%;
+}
+
 .navbar .logo {
   width: 150px;
   height: 50px;
-  background-color: rgb(142, 220, 74);
-  border-radius: 50%;
+  background: linear-gradient(135deg, rgb(142, 220, 74) 0%, rgb(92, 234, 32) 100%);
+  border-radius: 25px;
   margin-left: 20px;
-  transition: background-color 0.3s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  transition: background-color 0.3s;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  transition: font-weight 0.3s;
+  box-shadow: 0 4px 15px rgba(142, 220, 74, 0.3);
+}
 
-  &:hover {
-    background-color: rgb(92, 234, 32);
-    color: white;
-    transition: background-color 0.3s;
-  }
-
-  &:hover {
-    font-weight: bold;
-    transition: font-weight 0.3s;
-  }
+.navbar .logo:hover {
+  background: linear-gradient(135deg, rgb(92, 234, 32) 0%, rgb(142, 220, 74) 100%);
+  box-shadow: 0 6px 20px rgba(142, 220, 74, 0.4);
+  transform: translateY(-2px);
 }
 
 .navbar-menu {
@@ -71,15 +87,36 @@
   background: transparent;
   font-size: 16px;
   color: #49557e;
-  border: 1px solid tomato;
+  border: 2px solid tomato;
   padding: 10px 30px;
   border-radius: 50px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.sign-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, tomato, #ff6347);
+  transition: left 0.3s ease;
+  z-index: -1;
 }
 
 .sign-btn:hover {
-  background-color: #fff4f2;
+  color: white;
+  box-shadow: 0 6px 20px rgba(255, 99, 71, 0.3);
+  border-color: tomato;
+}
+
+.sign-btn:hover::before {
+  left: 0;
 }
 
 .navbar .active {
@@ -93,22 +130,23 @@
 
 .navbar-basket-icon {
   position: relative;
+  transition: transform 0.3s ease;
 }
 
-.navbar-search-icon {
-  position: relative;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
+.navbar-basket-icon:hover {
+  transform: scale(1.1);
 }
 
-.navbar-search-icon input {
-  width: 200px;
-  padding: 10px;
-  margin-left: 10px;
+.navbar-basket-icon a {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
 
-  border-radius: 5px;
-  outline: none;
+.navbar-basket-icon:hover a {
+  background-color: rgba(255, 127, 95, 0.1);
 }
 
 .navbar-basket-icon .cart-count {
@@ -125,9 +163,25 @@
   font-size: 12px;
   color: white;
   font-weight: bold;
-  border: 1px solid tomato;
+  border: 2px solid white;
+  background: linear-gradient(135deg, tomato 0%, #ff6347 100%);
+  box-shadow: 0 2px 8px rgba(255, 99, 71, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: pulse 2s infinite;
+}
 
-  background-color: tomato;
+.navbar-basket-icon:hover .cart-count {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(255, 99, 71, 0.6);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .navbar-profile {
@@ -136,26 +190,34 @@
 
 .navbar-profile-icon {
   background-color: #f8f9fa;
-  border: 1px solid #ccc;
+  border: 2px solid #e0e0e0;
   border-radius: 50%;
-  padding: 2px;
+  padding: 4px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  &:hover {
-    background-color: #e9ecef;
-  }
-  img {
-    width: 80%;
-    transition: transform 0.2s ease;
-  }
-  &:hover img {
-    transform: scale(1.05);
-  }
+  width: 35px;
+  height: 35px;
+}
+
+.navbar-profile-icon:hover {
+  background-color: #fff;
+  border-color: #ff7e5f;
+  box-shadow: 0 4px 12px rgba(255, 127, 95, 0.2);
+  transform: scale(1.1);
+}
+
+.navbar-profile-icon img {
+  width: 80%;
+  transition: transform 0.3s ease;
+}
+
+.navbar-profile-icon:hover img {
+  transform: scale(1.1);
 }
 
 .nav-profile-dropdown {
@@ -163,19 +225,29 @@
   display: none;
   right: 0;
   z-index: 1;
-  width: 160px;
+  width: 170px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
 .navbar-profile:hover .nav-profile-dropdown {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #fff2ef;
+  background: linear-gradient(135deg, #fff2ef 0%, #ffffff 100%);
   padding: 12px 25px;
-  border-radius: 4px;
-  border: 1px solid tomato;
+  border-radius: 12px;
+  border: 1px solid #ffe0d6;
   outline: 2px solid white;
   list-style: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .nav-profile-dropdown li {
@@ -183,14 +255,21 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
-}
-
-.nav-profile-dropdown img {
-  width: 20px;
+  padding: 8px 0;
+  transition: all 0.2s ease;
 }
 
 .nav-profile-dropdown li:hover {
   color: tomato;
+  transform: translateX(5px);
+}
+
+.nav-profile-dropdown li p {
+  transition: all 0.2s ease;
+}
+
+.nav-profile-dropdown li:hover p {
+  font-weight: 600;
 }
 
 .ham-menu {
